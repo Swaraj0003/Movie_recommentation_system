@@ -174,3 +174,4 @@ cython_debug/
 .pypirc
 /research/
 /data_set/
+/v1/CinnySlotDashboard/data/

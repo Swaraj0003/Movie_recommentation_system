@@ -1,0 +1,12 @@
+<div class="col-md-3">
+    <div style="position: fixed; top: 70px; right: 0; width: 25%; height: calc(100vh - 70px); background-color: #f8f9fa; overflow-y: auto; border-left: 1px solid #ddd;">
+      {% for title in recommendations %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h6 class="card-title">{{ title }}</h6>
+      </div>
+    </div>
+  {% endfor %}
+    </div>
+  </div>
+  

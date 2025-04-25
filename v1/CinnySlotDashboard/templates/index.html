@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Movie Listings{% endblock %}
+
+{% block content %}
+<div class="row">
+  <!-- Left column: 75% width for movie cards -->
+  <div class="col-md-9">
+    <div class="row">
+      {% for movie in movies %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <a href="{{ url_for('movie_details', tmdb_id=movie['tmdb_id']) }}">
+              <img src="{{ movie['poster'] }}" class="card-img-top" alt="{{ movie['title'] }}">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">{{ movie['title'] }}</h5>
+              <p class="card-text">⭐ Rating: N/A</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <nav class="mt-4">
+      <ul class="pagination justify-content-center">
+        {% if page > 1 %}
+          <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ page - 1 }}">Previous</a></li>
+        {% endif %}
+
+        {% for p in range(start_page, end_page + 1) %}
+          <li class="page-item {% if p == page %}active{% endif %}">
+            <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+          </li>
+        {% endfor %}
+
+        {% if page < total_pages %}
+          <li class="page-item"><a class="page-link" href="?page={{ page + 1 }}">Next</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ total_pages }}">Last</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Right column: 25% width fixed sidebar -->
+  {% include 'recommendation_box.html' %}
+</div>
+{% endblock %}
